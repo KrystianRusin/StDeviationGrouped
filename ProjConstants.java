@@ -11,9 +11,9 @@ public class ProjConstants {
     public static final int INVALID_CALC_METHOD = -11;
     public static final int INVALID_RANGE       = -21;
 
-    public static final int DISCRETE = -111;
-    public static final int FRQTABLE = -112;
-    public static final int GROUPED  = -113;
+    public static final int DISCRETE = 1;
+    public static final int FRQTABLE = 2;
+    public static final int GROUPED  = 3;
 
     public static final int MAXDATA = 2000;
     public static final int MINDATA = 0;
