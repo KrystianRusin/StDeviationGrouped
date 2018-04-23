@@ -46,7 +46,7 @@ public class Main {
         double  theVariance       = INVALID;
         double  theStDeviation    = INVALID;
 
-        StDeviation CalcSD = new StDeviation();
+        com.company.StDeviation CalcSD = new com.company.StDeviation();
 
         Scanner scanSystemIn = new Scanner(System.in, "UTF-8");
 
@@ -101,7 +101,7 @@ public class Main {
                     }
 
                     case 3:{ // Grouped Values
-                        CalcSD.setCalcMethod(DISCRETE);
+                        CalcSD.setCalcMethod(GROUPED);
                         methodSelected = true;
 
                         System.out.println("Please enter the number of groups");
@@ -142,7 +142,7 @@ public class Main {
 
             try {
 
-                File userFile = new File(userInputFileName + ".txt");
+                File userFile = new File(userInputFileName);
                 Scanner scanUserFile = new Scanner(userFile, "UTF-8");
 
                 howManyFileItems = 0;
@@ -232,3 +232,4 @@ public class Main {
         }
     } // end of main method
 } // end of class
+

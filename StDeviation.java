@@ -44,28 +44,7 @@ public class StDeviation {
     private double sdVar       = INVALID;
     private double sdDev       = INVALID;
 
-    // ******************************************************************************
-    // ******************************************************************************
 
-    // THERE ARE SEVERAL METHODS THAT WILL HAVE TO CHANGE IN THIS CLASS TO ALLOW THE
-    // CALCULATION OF STANDARD DEVIATION USING THE FREQUENCY TABLE METHOD AS WELL.
-    // PLEASE CONSIDER THE CHANGES THAT YOU WILL HAVE TO MAKE TO:
-    //   - addNewDataItem (precondition -  calculation method is set)
-    //   - calcAverage    (precondition -  data added, & calculation method is set)
-    //   - calcVariance   (precondition -  average calculated, data added, & calculation method is set)
-
-    // --------------------------------------------------
-    // The following method (procedure) will  set calculation method to be used.
-    // This will impact the path through the code in the addNewDataItem, calcAverage,
-    // and calcVariance methods
-    //
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - none
-    //      Post-Conditions:
-    //          - calcMethod set to INVALID_CALC_METHOD, DISCRETE, FRQTABLE, or GROUPED
-    //
     public void setCalcMethod(int how2calculate){
 
         switch (how2calculate){
@@ -91,31 +70,11 @@ public class StDeviation {
         }
     }
 
-    // --------------------------------------------------
-    // The following method (function) will return the current Calculation Method
-    // value.
-    //
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - DISCRETE, FRQTABLE, or INVALID_CALC_METHOD
-    //
     public int getCalcMethod(){
         return sdcalcMethod;
     }
 
-    // --------------------------------------------------
-    // The following method (procedure) will return set current Minimum value for
-    // use with the Frequency Method of Calculation.
-    //
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - none
-    //      Post-Conditions:
-    //          - sdMinRange set to INVALID_RANGE, or
-    //          - an Integer value between MINDATA & MAXDATA - 1
-    //
+
     public void setMin(int userMin) {
         switch (getCalcMethod()) {
             case 2: {
@@ -136,33 +95,12 @@ public class StDeviation {
         }
     }
 
-    // --------------------------------------------------
-    // The following method (function) will return the current Minimum value for
-    // use with the Frequency Method of Calculation.
-    //
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - INVALID_RANGE,
-    //          - Integer value between MINDATA & MAXDATA
-    //
+
     public int getMin(){
         return sdMinRange;
     }
 
 
-    // --------------------------------------------------
-    // The following method (procedure) will return set current Maximum value for
-    // use with the Frequency Method of Calculation.
-    //
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - none
-    //      Post-Conditions:
-    //          - sdMaxRange set to INVALID_RANGE, or
-    //          - an Integer value between MINDATA & MAXDATA - 1
-    //
     public void setMax(int userMax) {
         switch (sdcalcMethod) {
             case 2: {
@@ -183,67 +121,22 @@ public class StDeviation {
         }
     }
 
-    // --------------------------------------------------
-    // The following method (function) will return the current Maximum value for
-    // use with the Frequency Method of Calculation.
-    //
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - INVALID_RANGE,
-    //          - Integer value between MINDATA & MAXDATA
-    //      Post-Conditions:
-    //          - none
-    //
+
     public int getMax(){
         return sdMaxRange;
     }
 
 
-    // --------------------------------------------------
-    // The following method (procedure) will set the current value for
-    // the number of groups the user wishes to use with the Frequency
-    // Method of Calculation.
-    //
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - none,
-    //      Post-Conditions:
-    //          - stores an Integer value between 1, and userMax - userMin
-    //
-    public void setNumberOfGroups(int groups){
 
-        if ((groups > MINDATA) && (groups <= (sdMaxRange  - sdMinRange))){
+    public void setNumberOfGroups(int groups){
             sdNumOfGroups = groups;
-        }
-        else {
-            sdNumOfGroups = INVALID;
-        }
+
     }
 
     public int getNumberOfGroups(){
         return sdNumOfGroups;
     }
 
-    // ******************************************************************************
-    // ******************************************************************************
-
-    // --------------------------------------------------
-    // The following method (procedure) will take a new data item (a parameter)
-    // and add it into the 1 Dimensional Array of data values to be used later.
-    //
-    //      Pre-Conditions:
-    //          - Calculation Method, and Range values must have been set
-    //      Return Value:
-    //          - none
-    //      Post-Condition
-    //          - Data Item is added into Data Storage
-    //          - sdItems incremented
-    //          - ERROR
-    //              - sdItems set to INVALID, and
-    //              - calcMethod is set to INVALID_CALC_METHOD
-    //
     public void addNewDataItem(int dataItem){
 
         if ((sdItems == INVALID)){
@@ -316,6 +209,7 @@ public class StDeviation {
                 }
 
             }
+            break;
             default:{
                 sdItems    = INVALID;
                 sdcalcMethod = INVALID_CALC_METHOD;
@@ -326,40 +220,12 @@ public class StDeviation {
 
     }
 
-    // --------------------------------------------------
-    // The following method (function) will return the total number of data
-    // items currently stored
 
-    //      Pre-Conditions:
-    //          - none
-    //      Return Value:
-    //          - the number of data items
-    //      Post-Condition
-    //          - none
-    //
     public int getNumberOfDataItems(){
         return sdItems;
     }
 
-    // --------------------------------------------------
-    // The following method (procedure) calculates the average based on
-    // the calculation method selected
-    //
-    //      Pre-Conditions:
-    //          - Calculation Method, and Range values must have been set
-    //          - at least one data has been added
-    //      Return Value:
-    //          - none
-    //      Post-Condition
-    //          - NO ERROR sdAve is set to the average
-    //          - ERROR
-    //              Data Items:
-    //                 - sdAve = INVALID
-    //              Data Range:
-    //                 - sdAve = INVALID, and sdMaxRange & sdMaxRange = INVALID_RANGE
-    //              Calculation Method:
-    //                 - sdAve = INVALID, and calcMethod = INVALID_CALC_METHOD
-    //
+
     public double calcAverage(){
 
         double total = 0;
@@ -420,36 +286,47 @@ public class StDeviation {
 
             case GROUPED:{
                 double storage = INVALID;
-                System.out.println(getNumberOfDataItems());
+                int groupNum = getNumberOfGroups();
 
-                if (getNumberOfDataItems()%getNumberOfGroups() != 0){ //Checks to see if the number of data items can be easily divided
-                                                                      //by the requested number of groups, if it is not then it prints out an error.
-                                                                      //If it is easily divisible, then proceed with calculating average.
+                int range = (getMax() - getMin())+1;
+                if (range%getNumberOfGroups() != 0){ //Checks to see if the number of data items can be easily divided
+                    //by the requested number of groups, if it is not then it prints out an error.
+                    //If it is easily divisible, then proceed with calculating average.
                     System.out.println("ERROR: Number of data items is not easily divisible by the number of groups");
                 }
-                else{
-                    sdGroupSize = getNumberOfDataItems()/getNumberOfGroups(); //Finds group size by dividing number of data items by number of groups.
-                sdMin = getMin(); //sets minimum for group
-                sdMax = getMin() + sdGroupSize; //sets maximum for group
-                    for (int j = 0;j<getNumberOfGroups();j++) { //For loop that repeats itself for the amount of groups there are
+                else {
+                    int interval = range / groupNum;
+                    System.out.println("NUMBER OF GROUPS:" + groupNum);
+                    System.out.println("RANGE:" + range);
+                    System.out.println("INTERVAL:" + interval);
+                    sdMin = getMin();
+                    sdMax = sdMin + interval;
 
-                        sdMidPoint = (sdMin+sdMax)/2; //finds mid point between min and max
+                    for (int i = interval; i < groupNum; i = i + interval) {
+                        System.out.println("MIN:" + sdMin);
+                        sdMax = (sdMin + interval) - 1;
+                        System.out.println("MAX:" + sdMax);
+                        sdMidPoint = (sdMax + sdMin) / 2;
+                        System.out.println("MIDPOINT:" + sdMidPoint);
 
-                        if (sdMax > sdMin) {
-
-                            // Loop over all values in range and add to the total
-                            // the value, "i", multiplied by the frequence "Data[i]"
-                            for (int i = sdMin; i <= sdMax; i++) {
-                                total = total + (i * Data[i]);
-                            }
-                            storage += total*sdMidPoint; //storages acts as the sum of midpoint*frequency
+                        // Loop over all values in range and add to the total
+                        // the value, "i", multiplied by the frequency "Data[i]"
+                        for (int j = getMin(); j <= getMax(); j++) {
+                            total = total + (j * Data[j]);
                         }
-                    }
-                    sdAve = storage/getNumberOfGroups();//divides storage by number of groups to get the mean
+                        storage += total * sdMidPoint; //storage acts as the sum of midpoint*frequency
+                        sdMin = sdMax;
+                        System.out.println("MIN:" + sdMin);
+                        sdMax = sdMin + interval;
+                        System.out.println("MAX:" + sdMax);
 
+                        sdAve = storage / getNumberOfGroups();//divides storage by number of groups to get the mean
+
+                    }
+                }
 
                 }
-            }
+            break;
 
             default:{
                 sdAve = INVALID;
@@ -463,16 +340,7 @@ public class StDeviation {
         return sdAve;
     }
 
-    // --------------------------------------------------
-    // The following method (function) returns a double precision value which is the Variance of all
-    // of the data values. If there is no data, or if the average has not been calculated
-    // then it returns INVALID
-    //
-    //      Pre-Conditions:
-    //          - Calculation Method, and Range values must have been set
-    //          - at least one data has been added
-    //          - the average must have been calculated
-    //
+
     public double calcVariance(){
 
         double total = 0;
@@ -548,7 +416,7 @@ public class StDeviation {
 
                 }
             }
-
+            break;
             default:{
                 sdVar = INVALID;
                 sdcalcMethod = INVALID_CALC_METHOD;
@@ -560,16 +428,7 @@ public class StDeviation {
         return sdVar;
     }
 
-    // --------------------------------------------------
-    // The following method (function) returns a double precision value which is the Standard
-    // Deviation of all of the data values. If there is no data, no average, or if
-    // the variance has not been calculated then it returns INVALID
-    //
-    //      Pre-Conditions:
-    //          - at least one data has been added
-    //          - the average must have been calculated
-    //          - the variance must have been calculated
-    //
+
     public double calcStandardDeviation(){
 
         // Checks that data entry, average, and variance have been done
